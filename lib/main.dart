@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 
 import './pages/blog_page/blog_page.dart';
 import './pages/home_page/home_page.dart';
-import 'pages/mobx_sample_page/mobx_sample_page.dart';
+// import './pages/mobx_sample_page/mobx_sample_page.dart';
+import './pages//profile//profile_page.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -29,7 +30,7 @@ class TabHomeState extends State<TabHome> {
   void initState() {
     super.initState();
 
-    this._children = [HomePage(), BlogPage(), MobxSamplePage()];
+    this._children = [HomePage(), BlogPage(), ProfilePage()];
   }
 
   // @override

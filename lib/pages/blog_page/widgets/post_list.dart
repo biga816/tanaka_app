@@ -4,8 +4,8 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:tanaka_app/stores/posts/posts_store.dart';
 import 'package:tanaka_app/models/post.dart';
 import 'package:tanaka_app/utils/date_util.dart';
+import 'package:tanaka_app/widgets/list_spinner/list_spinner.dart';
 import './post_list_item.dart';
-import './list_spinner.dart';
 
 final post = PostsStore();
 
