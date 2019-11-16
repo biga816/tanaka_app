@@ -70,7 +70,7 @@ class PostListState extends State<PostList> {
 
   Widget _buildRow(Post post) {
     return Card(
-      elevation: 16,
+      elevation: 8,
       margin: EdgeInsets.all(6),
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(8))),

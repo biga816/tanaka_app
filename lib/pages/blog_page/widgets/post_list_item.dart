@@ -17,7 +17,7 @@ class PostListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 160,
+      height: 164,
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
@@ -66,20 +66,12 @@ class _ArticleDescription extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              // Text(
-              //   '$publishDate',
-              //   style: const TextStyle(
-              //     fontSize: 12.0,
-              //     // color: Colors.white60,
-              //   ),
-              // ),
               Text(
                 '$subtitle',
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
                 style: const TextStyle(
                   fontSize: 12.0,
-                  // color: Colors.white60,
                 ),
               ),
               const Padding(padding: EdgeInsets.only(bottom: 2.0)),

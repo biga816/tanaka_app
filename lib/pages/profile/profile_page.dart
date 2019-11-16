@@ -29,15 +29,15 @@ class ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text('Profile'),
-        ),
-        body: SingleChildScrollView(
-            child: Column(
+      appBar: AppBar(
+        title: Text('Profile'),
+      ),
+      body: SingleChildScrollView(
+        child: Column(
           children: <Widget>[
             Center(
               child: Padding(
-                padding: EdgeInsets.fromLTRB(0, 48, 0, 32),
+                padding: EdgeInsets.fromLTRB(0, 48, 0, 16),
                 child: ClipRRect(
                     borderRadius: BorderRadius.circular(150),
                     child: Image(
@@ -51,16 +51,37 @@ class ProfilePageState extends State<ProfilePage> {
                 padding: const EdgeInsets.all(16.0),
                 child: Observer(builder: (_) {
                   if (profileStore.profile != null) {
-                    return Html(
-                      data: '${profileStore.profile?.description}',
-                      linkStyle: const TextStyle(
-                        color: Colors.cyan,
-                      ),
-                    );
+                    return Card(
+                        elevation: 8,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(8))),
+                        child: Padding(
+                            padding: EdgeInsets.all(16),
+                            child: Column(
+                              children: <Widget>[
+                                Align(
+                                  alignment: Alignment.centerLeft,
+                                  child: Text(
+                                    '${profileStore.profile?.name}',
+                                    style: TextStyle(fontSize: 28),
+                                  ),
+                                ),
+                                Padding(padding: EdgeInsets.only(bottom: 16.0)),
+                                Html(
+                                  data: '${profileStore.profile?.description}',
+                                  linkStyle: const TextStyle(
+                                    color: Colors.cyan,
+                                  ),
+                                )
+                              ],
+                            )));
                   }
                   return ListSpinner(loading: true);
                 }))
           ],
-        )));
+        ),
+      ),
+      backgroundColor: Colors.grey[100],
+    );
   }
 }

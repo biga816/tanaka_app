@@ -9,6 +9,7 @@ class BlogPage extends StatelessWidget {
         title: Text('Blog'),
       ),
       body: PostList(),
+      backgroundColor: Colors.grey[100],
     );
   }
 }
