@@ -161,7 +161,7 @@ class _BottomBarState extends State<BottomBar> with TickerProviderStateMixin {
                             widget.addClick();
                           },
                           child: Icon(
-                            Icons.add,
+                            Icons.mail_outline,
                             color: Colors.white,
                             size: 32,
                           ),
