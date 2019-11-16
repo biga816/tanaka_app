@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-// import 'package:tanaka_app/pages/second_page/second_page.dart';
 
 class HomePage extends StatelessWidget {
   @override

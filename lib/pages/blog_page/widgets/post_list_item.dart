@@ -23,13 +23,15 @@ class PostListItem extends StatelessWidget {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            AspectRatio(
-              aspectRatio: 1.5,
-              child: thumbnail,
-            ),
+            Padding(
+                padding: const EdgeInsets.fromLTRB(8, 0, 0, 0),
+                child: AspectRatio(
+                  aspectRatio: 1.5,
+                  child: thumbnail,
+                )),
             Expanded(
               child: Padding(
-                padding: const EdgeInsets.fromLTRB(20.0, 0.0, 2.0, 0.0),
+                padding: const EdgeInsets.fromLTRB(20, 0, 2, 0),
                 child: _ArticleDescription(
                   title: title,
                   subtitle: subtitle,

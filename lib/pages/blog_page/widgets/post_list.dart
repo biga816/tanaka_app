@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
+import 'package:tanaka_app/pages/blog_detail_page/blog_detail_page.dart';
 import 'package:tanaka_app/stores/posts/posts_store.dart';
 import 'package:tanaka_app/models/post.dart';
 import 'package:tanaka_app/utils/date_util.dart';
@@ -49,31 +50,36 @@ class PostListState extends State<PostList> {
         onNotification: _handleScrollNotification,
         child: Observer(builder: (_) {
           return ListView.builder(
-              padding: const EdgeInsets.all(16.0),
+              padding: const EdgeInsets.fromLTRB(4, 16, 4, 16),
               controller: controller,
               itemBuilder: (context, i) {
-                if (i < post.posts.length * 2) {
+                if (i < post.posts.length) {
                   // item
-                  if (i.isOdd) return Divider();
-                  final index = i ~/ 2;
-                  return _buildRow(post.posts[index]);
+                  // if (i.isOdd) return Divider();
+                  // final index = i ~/ 2;
+                  return _buildRow(post.posts[i]);
                 } else {
                   // loading
                   return Observer(
                       builder: (_) => ListSpinner(loading: post.loading));
                 }
               },
-              itemCount: post.posts.length * 2 + 1);
+              itemCount: post.posts.length + 1);
         }));
   }
 
   Widget _buildRow(Post post) {
-    return PostListItem(
-      thumbnail:
-          Image(image: NetworkImage(post.media.medium), fit: BoxFit.cover),
-      title: post.title,
-      subtitle: post.tags.map((tag) => tag.name).join(", "),
-      publishDate: DateUtil.format(post.date, "yyyy/MM/dd(E) HH:mm", "ja_JP"),
+    return Card(
+      child: InkWell(
+          child: PostListItem(
+            thumbnail: Image(
+                image: NetworkImage(post.media.medium), fit: BoxFit.cover),
+            title: post.title,
+            subtitle: post.tags.map((tag) => tag.name).join(", "),
+            publishDate:
+                DateUtil.format(post.date, "yyyy/MM/dd(E) HH:mm", "ja_JP"),
+          ),
+          onTap: () => goToDetail(post)),
     );
   }
 
@@ -85,5 +91,13 @@ class PostListState extends State<PostList> {
       }
     }
     return false;
+  }
+
+  void goToDetail(Post post) {
+    print("detail!!!");
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => BlogDtailPage(post)),
+    );
   }
 }

@@ -15,3 +15,10 @@ $ flutter packages pub run build_runner watch
 or
 $ flutter packages pub run build_runner watch --delete-conflicting-outputs
 ```
+
+Run. (iOS)
+
+```
+$ open -a Simulator
+$ flutter run
+```
