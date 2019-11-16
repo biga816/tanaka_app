@@ -50,7 +50,7 @@ class PostListState extends State<PostList> {
         onNotification: _handleScrollNotification,
         child: Observer(builder: (_) {
           return ListView.builder(
-              padding: const EdgeInsets.fromLTRB(4, 16, 4, 16),
+              padding: const EdgeInsets.fromLTRB(8, 16, 8, 16),
               controller: controller,
               itemBuilder: (context, i) {
                 if (i < post.posts.length) {
@@ -70,6 +70,10 @@ class PostListState extends State<PostList> {
 
   Widget _buildRow(Post post) {
     return Card(
+      elevation: 16,
+      margin: EdgeInsets.all(6),
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(8))),
       child: InkWell(
           child: PostListItem(
             thumbnail: Image(

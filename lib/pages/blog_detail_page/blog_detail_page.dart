@@ -13,40 +13,41 @@ class BlogDtailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text("${post?.title}"),
-        ),
-        body: SingleChildScrollView(
-            child: Column(
-          children: <Widget>[
-            Center(
-              child: Image(
-                image: NetworkImage(post.media.large),
-                fit: BoxFit.cover,
-              ),
+      appBar: AppBar(
+        title: Text("${post?.title}"),
+      ),
+      body: SingleChildScrollView(
+          child: Column(
+        children: <Widget>[
+          Center(
+            child: Image(
+              image: NetworkImage(post.media.large),
+              fit: BoxFit.cover,
             ),
-            BlogHeader(post),
-            Padding(
-                padding: EdgeInsets.fromLTRB(8, 8, 8, 64),
-                child: Html(
-                  useRichText: false,
-                  data: '${post?.content}',
-                  linkStyle: const TextStyle(
-                    color: Colors.cyan,
-                  ),
-                  onLinkTap: (url) {
-                    print(url);
-                  },
-                  customRender: (node, children) {
-                    if (node is dom.Element) {
-                      switch (node.localName) {
-                        case "pre":
-                          return SorceCode(node.text);
-                      }
+          ),
+          BlogHeader(post),
+          Padding(
+              padding: EdgeInsets.fromLTRB(8, 8, 8, 64),
+              child: Html(
+                useRichText: false,
+                data: '${post?.content}',
+                linkStyle: const TextStyle(
+                  color: Colors.cyan,
+                ),
+                onLinkTap: (url) {
+                  print(url);
+                },
+                customRender: (node, children) {
+                  if (node is dom.Element) {
+                    switch (node.localName) {
+                      case "pre":
+                        return SorceCode(node.text);
                     }
-                  },
-                ))
-          ],
-        )));
+                  }
+                },
+              ))
+        ],
+      )),
+    );
   }
 }
