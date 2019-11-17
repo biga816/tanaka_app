@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
+import 'package:universal_html/prefer_universal/html.dart' as html;
 
 import './tab_icon_data.dart';
 
@@ -162,6 +163,8 @@ class _BottomBarState extends State<BottomBar> with TickerProviderStateMixin {
                               focusColor: Colors.transparent,
                               onTap: () {
                                 widget.addClick();
+                                html.window.open(
+                                    'https://twitter.com/biga816', '_blank');
                               },
                               child: Icon(
                                 Icons.mail_outline,

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tanaka_app/models/post.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:html/dom.dart' as dom;
+import 'package:universal_html/prefer_universal/html.dart' as html;
 
 import 'package:tanaka_app/widgets/fixed_body/fixed_body.dart';
 import './widgets/sorce-code.dart';
@@ -41,7 +42,7 @@ class BlogDtailPage extends StatelessWidget {
                       color: Colors.cyan,
                     ),
                     onLinkTap: (url) {
-                      print(url);
+                      html.window.open(url, '_blank');
                     },
                     customRender: (node, children) {
                       if (node is dom.Element) {

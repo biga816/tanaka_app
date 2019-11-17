@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_html/flutter_html.dart';
+import 'package:universal_html/prefer_universal/html.dart' as html;
 
 import 'package:tanaka_app/models/profile.dart';
 import 'package:tanaka_app/stores/profile/profile_store.dart';
@@ -57,8 +58,10 @@ class ProfilePageState extends State<ProfilePage> {
                       return Card(
                           elevation: 4,
                           shape: RoundedRectangleBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(8))),
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(8),
+                            ),
+                          ),
                           child: Padding(
                               padding: EdgeInsets.all(16),
                               child: Column(
@@ -78,6 +81,9 @@ class ProfilePageState extends State<ProfilePage> {
                                     linkStyle: const TextStyle(
                                       color: Colors.cyan,
                                     ),
+                                    onLinkTap: (url) {
+                                      html.window.open(url, '_blank');
+                                    },
                                   )
                                 ],
                               )));
