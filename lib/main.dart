@@ -13,6 +13,7 @@ void main() {
     home: TabHome(),
     theme: new ThemeData(
       // brightness: Brightness.dark,
+      backgroundColor: Colors.grey[100],
       primaryColor: Colors.cyan[600],
       accentColor: Colors.cyan[600],
       fontFamily: 'Roboto',
@@ -77,10 +78,7 @@ class TabHomeState extends State<TabHome> with TickerProviderStateMixin {
             } else {
               return Stack(
                 children: <Widget>[
-                  Padding(
-                    padding: EdgeInsets.only(bottom: 58),
-                    child: tabBody,
-                  ),
+                  tabBody,
                   bottomBar(),
                 ],
               );

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'dart:math' as math;
 
 import './tab_icon_data.dart';
-import './bar_theme.dart';
 
 class BottomBar extends StatefulWidget {
   final Function(int index) changeIndex;
@@ -29,141 +28,147 @@ class _BottomBarState extends State<BottomBar> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      alignment: AlignmentDirectional.bottomCenter,
-      children: <Widget>[
-        AnimatedBuilder(
-          animation: animationController,
-          builder: (BuildContext context, Widget child) {
-            return new Transform(
-              transform: new Matrix4.translationValues(0.0, 0.0, 0.0),
-              child: new PhysicalShape(
-                color: Colors.white,
-                // color: Colors.black54,
-                elevation: 16.0,
-                clipper: TabClipper(
-                    radius: Tween(begin: 0.0, end: 1.0)
-                            .animate(CurvedAnimation(
-                                parent: animationController,
-                                curve: Curves.fastOutSlowIn))
-                            .value *
-                        38.0),
-                child: Column(
-                  children: <Widget>[
-                    SizedBox(
-                      height: 62,
-                      child: Padding(
-                        padding: EdgeInsets.only(left: 8, right: 8, top: 4),
-                        child: Row(
-                          children: <Widget>[
-                            Expanded(
-                              child: TabIcons(
-                                  tabIconData: widget.tabIconsList[0],
-                                  removeAllSelect: () {
-                                    setRemoveAllSelection(
-                                        widget.tabIconsList[0]);
-                                    widget.changeIndex(0);
-                                  }),
+    return Center(
+      child: ConstrainedBox(
+        constraints: BoxConstraints.tightFor(width: 768),
+        child: Stack(
+          alignment: AlignmentDirectional.bottomCenter,
+          children: <Widget>[
+            AnimatedBuilder(
+              animation: animationController,
+              builder: (BuildContext context, Widget child) {
+                return new Transform(
+                  transform: new Matrix4.translationValues(0.0, 0.0, 0.0),
+                  child: new PhysicalShape(
+                    color: Colors.white,
+                    // color: Colors.black54,
+                    elevation: 16.0,
+                    clipper: TabClipper(
+                        radius: Tween(begin: 0.0, end: 1.0)
+                                .animate(CurvedAnimation(
+                                    parent: animationController,
+                                    curve: Curves.fastOutSlowIn))
+                                .value *
+                            38.0),
+                    child: Column(
+                      children: <Widget>[
+                        SizedBox(
+                          height: 62,
+                          child: Padding(
+                            padding: EdgeInsets.only(left: 8, right: 8, top: 4),
+                            child: Row(
+                              children: <Widget>[
+                                Expanded(
+                                  child: TabIcons(
+                                      tabIconData: widget.tabIconsList[0],
+                                      removeAllSelect: () {
+                                        setRemoveAllSelection(
+                                            widget.tabIconsList[0]);
+                                        widget.changeIndex(0);
+                                      }),
+                                ),
+                                Expanded(
+                                  child: TabIcons(
+                                      tabIconData: widget.tabIconsList[1],
+                                      removeAllSelect: () {
+                                        setRemoveAllSelection(
+                                            widget.tabIconsList[1]);
+                                        widget.changeIndex(1);
+                                      }),
+                                ),
+                                SizedBox(
+                                  width: Tween(begin: 0.0, end: 1.0)
+                                          .animate(CurvedAnimation(
+                                              parent: animationController,
+                                              curve: Curves.fastOutSlowIn))
+                                          .value *
+                                      64.0,
+                                ),
+                                Expanded(
+                                  child: TabIcons(
+                                      tabIconData: widget.tabIconsList[2],
+                                      removeAllSelect: () {
+                                        setRemoveAllSelection(
+                                            widget.tabIconsList[2]);
+                                        widget.changeIndex(2);
+                                      }),
+                                ),
+                                Expanded(
+                                  child: TabIcons(
+                                      tabIconData: widget.tabIconsList[3],
+                                      removeAllSelect: () {
+                                        setRemoveAllSelection(
+                                            widget.tabIconsList[3]);
+                                        widget.changeIndex(3);
+                                      }),
+                                ),
+                              ],
                             ),
-                            Expanded(
-                              child: TabIcons(
-                                  tabIconData: widget.tabIconsList[1],
-                                  removeAllSelect: () {
-                                    setRemoveAllSelection(
-                                        widget.tabIconsList[1]);
-                                    widget.changeIndex(1);
-                                  }),
-                            ),
-                            SizedBox(
-                              width: Tween(begin: 0.0, end: 1.0)
-                                      .animate(CurvedAnimation(
-                                          parent: animationController,
-                                          curve: Curves.fastOutSlowIn))
-                                      .value *
-                                  64.0,
-                            ),
-                            Expanded(
-                              child: TabIcons(
-                                  tabIconData: widget.tabIconsList[2],
-                                  removeAllSelect: () {
-                                    setRemoveAllSelection(
-                                        widget.tabIconsList[2]);
-                                    widget.changeIndex(2);
-                                  }),
-                            ),
-                            Expanded(
-                              child: TabIcons(
-                                  tabIconData: widget.tabIconsList[3],
-                                  removeAllSelect: () {
-                                    setRemoveAllSelection(
-                                        widget.tabIconsList[3]);
-                                    widget.changeIndex(3);
-                                  }),
-                            ),
-                          ],
+                          ),
                         ),
-                      ),
+                        SizedBox(
+                          height: MediaQuery.of(context).padding.bottom,
+                        )
+                      ],
                     ),
-                    SizedBox(
-                      height: MediaQuery.of(context).padding.bottom,
-                    )
-                  ],
-                ),
-              ),
-            );
-          },
-        ),
-        Padding(
-          padding:
-              EdgeInsets.only(bottom: MediaQuery.of(context).padding.bottom),
-          child: SizedBox(
-            width: 38 * 2.0,
-            height: 38 + 62.0,
-            child: Container(
-              alignment: Alignment.topCenter,
-              color: Colors.transparent,
+                  ),
+                );
+              },
+            ),
+            Padding(
+              padding: EdgeInsets.only(
+                  bottom: MediaQuery.of(context).padding.bottom),
               child: SizedBox(
                 width: 38 * 2.0,
-                height: 38 * 2.0,
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: new ScaleTransition(
-                    alignment: Alignment.center,
-                    scale: Tween(begin: 0.0, end: 1.0).animate(CurvedAnimation(
-                        parent: animationController,
-                        curve: Curves.fastOutSlowIn)),
-                    child: Container(
-                      // alignment: Alignment.center,s
-                      decoration: BoxDecoration(
-                        color: BarTheme.nearlyDarkBlue,
-                        gradient: LinearGradient(
-                            colors: [
-                              BarTheme.nearlyDarkBlue,
-                              HexColor("#00ACC1"),
+                height: 38 + 62.0,
+                child: Container(
+                  alignment: Alignment.topCenter,
+                  color: Colors.transparent,
+                  child: SizedBox(
+                    width: 38 * 2.0,
+                    height: 38 * 2.0,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: new ScaleTransition(
+                        alignment: Alignment.center,
+                        scale: Tween(begin: 0.0, end: 1.0).animate(
+                            CurvedAnimation(
+                                parent: animationController,
+                                curve: Curves.fastOutSlowIn)),
+                        child: Container(
+                          // alignment: Alignment.center,s
+                          decoration: BoxDecoration(
+                            color: Colors.cyan[800],
+                            gradient: LinearGradient(
+                                colors: [
+                                  Colors.cyan[800],
+                                  Colors.cyan[300],
+                                ],
+                                begin: Alignment.topLeft,
+                                end: Alignment.bottomRight),
+                            shape: BoxShape.circle,
+                            boxShadow: <BoxShadow>[
+                              BoxShadow(
+                                  color: Colors.cyan[800].withOpacity(0.4),
+                                  offset: Offset(4.0, 8.0),
+                                  blurRadius: 16.0),
                             ],
-                            begin: Alignment.topLeft,
-                            end: Alignment.bottomRight),
-                        shape: BoxShape.circle,
-                        boxShadow: <BoxShadow>[
-                          BoxShadow(
-                              color: BarTheme.nearlyDarkBlue.withOpacity(0.4),
-                              offset: Offset(8.0, 16.0),
-                              blurRadius: 16.0),
-                        ],
-                      ),
-                      child: Material(
-                        color: Colors.transparent,
-                        child: InkWell(
-                          splashColor: Colors.white.withOpacity(0.1),
-                          highlightColor: Colors.transparent,
-                          focusColor: Colors.transparent,
-                          onTap: () {
-                            widget.addClick();
-                          },
-                          child: Icon(
-                            Icons.mail_outline,
-                            color: Colors.white,
-                            size: 32,
+                          ),
+                          child: Material(
+                            color: Colors.transparent,
+                            child: InkWell(
+                              splashColor: Colors.white.withOpacity(0.1),
+                              highlightColor: Colors.transparent,
+                              focusColor: Colors.transparent,
+                              onTap: () {
+                                widget.addClick();
+                              },
+                              child: Icon(
+                                Icons.mail_outline,
+                                color: Colors.white,
+                                size: 32,
+                              ),
+                            ),
                           ),
                         ),
                       ),
@@ -172,9 +177,9 @@ class _BottomBarState extends State<BottomBar> with TickerProviderStateMixin {
                 ),
               ),
             ),
-          ),
+          ],
         ),
-      ],
+      ),
     );
   }
 
@@ -244,9 +249,13 @@ class _TabIconsState extends State<TabIcons> with TickerProviderStateMixin {
                   scale: Tween(begin: 0.88, end: 1.0).animate(CurvedAnimation(
                       parent: widget.tabIconData.animationController,
                       curve: Interval(0.1, 1.0, curve: Curves.fastOutSlowIn))),
-                  child: Image.asset(widget.tabIconData.isSelected
-                      ? widget.tabIconData.selctedImagePath
-                      : widget.tabIconData.imagePath),
+                  child: Icon(
+                    widget.tabIconData.icon,
+                    color: widget.tabIconData.isSelected
+                        ? Colors.black87
+                        : Colors.black38,
+                    size: 32,
+                  ),
                 ),
                 Positioned(
                   top: 4,
@@ -262,7 +271,7 @@ class _TabIconsState extends State<TabIcons> with TickerProviderStateMixin {
                       width: 8,
                       height: 8,
                       decoration: BoxDecoration(
-                        color: BarTheme.nearlyDarkBlue,
+                        color: Colors.cyan[800],
                         shape: BoxShape.circle,
                       ),
                     ),
@@ -282,7 +291,7 @@ class _TabIconsState extends State<TabIcons> with TickerProviderStateMixin {
                       width: 4,
                       height: 4,
                       decoration: BoxDecoration(
-                        color: BarTheme.nearlyDarkBlue,
+                        color: Colors.cyan[800],
                         shape: BoxShape.circle,
                       ),
                     ),
@@ -302,7 +311,7 @@ class _TabIconsState extends State<TabIcons> with TickerProviderStateMixin {
                       width: 6,
                       height: 6,
                       decoration: BoxDecoration(
-                        color: BarTheme.nearlyDarkBlue,
+                        color: Colors.cyan[800],
                         shape: BoxShape.circle,
                       ),
                     ),

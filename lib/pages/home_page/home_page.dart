@@ -15,14 +15,10 @@ class HomePage extends StatelessWidget {
           ),
         ),
         Container(
-            padding: const EdgeInsets.fromLTRB(0.0, 40.0, .0, 0.0),
-            child: Center(
-              child: Image.asset(
-                'assets/images/logo_white.png',
-                // width: MediaQuery.of(context).size.width * 0.4,
-                width: 200,
-              ),
-            ))
+          child: Center(
+            child: Image.asset('assets/images/logo_white.png', width: 200),
+          ),
+        )
       ],
     ));
   }

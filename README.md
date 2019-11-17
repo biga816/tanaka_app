@@ -22,3 +22,12 @@ Run. (iOS)
 $ open -a Simulator
 $ flutter run
 ```
+
+Build. (Web)
+
+```
+$ flutter build web
+(check at local)
+$ cd build/web
+$ php -S localhost:8080
+```

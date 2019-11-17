@@ -50,7 +50,7 @@ class PostListState extends State<PostList> {
         onNotification: _handleScrollNotification,
         child: Observer(builder: (_) {
           return ListView.builder(
-              padding: const EdgeInsets.fromLTRB(8, 16, 8, 16),
+              padding: const EdgeInsets.fromLTRB(8, 16, 8, 90),
               controller: controller,
               itemBuilder: (context, i) {
                 if (i < post.posts.length) {
@@ -61,7 +61,11 @@ class PostListState extends State<PostList> {
                 } else {
                   // loading
                   return Observer(
-                      builder: (_) => ListSpinner(loading: post.loading));
+                    builder: (_) => Padding(
+                      padding: EdgeInsets.only(bottom: 58),
+                      child: ListSpinner(loading: post.loading),
+                    ),
+                  );
                 }
               },
               itemCount: post.posts.length + 1);
@@ -70,7 +74,7 @@ class PostListState extends State<PostList> {
 
   Widget _buildRow(Post post) {
     return Card(
-      elevation: 8,
+      elevation: 4,
       margin: EdgeInsets.all(6),
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(8))),
@@ -98,7 +102,6 @@ class PostListState extends State<PostList> {
   }
 
   void goToDetail(Post post) {
-    print("detail!!!");
     Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => BlogDtailPage(post)),

@@ -1,45 +1,40 @@
 import 'package:flutter/material.dart';
 
 class TabIconData {
-  String imagePath;
-  String selctedImagePath;
+  IconData icon;
+
   bool isSelected;
   int index;
   AnimationController animationController;
 
   TabIconData({
-    this.imagePath = '',
+    this.icon,
     this.index = 0,
-    this.selctedImagePath = "",
     this.isSelected = false,
     this.animationController,
   });
 
   static List<TabIconData> tabIconsList = [
     TabIconData(
-      imagePath: 'assets/icons/tab_3.png',
-      selctedImagePath: 'assets/icons/tab_3s.png',
+      icon: Icons.home,
       index: 0,
       isSelected: true,
       animationController: null,
     ),
     TabIconData(
-      imagePath: 'assets/icons/tab_1.png',
-      selctedImagePath: 'assets/icons/tab_1s.png',
+      icon: Icons.list,
       index: 1,
       isSelected: false,
       animationController: null,
     ),
     TabIconData(
-      imagePath: 'assets/icons/tab_2.png',
-      selctedImagePath: 'assets/icons/tab_2s.png',
+      icon: Icons.laptop_mac,
       index: 2,
       isSelected: false,
       animationController: null,
     ),
     TabIconData(
-      imagePath: 'assets/icons/tab_4.png',
-      selctedImagePath: 'assets/icons/tab_4s.png',
+      icon: Icons.person,
       index: 3,
       isSelected: false,
       animationController: null,

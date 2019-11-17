@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import './widgets/post_list.dart';
+import 'package:tanaka_app/widgets/fixed_body/fixed_body.dart';
 
 class BlogPage extends StatelessWidget {
   @override
@@ -8,7 +9,9 @@ class BlogPage extends StatelessWidget {
       appBar: AppBar(
         title: Text('Blog'),
       ),
-      body: PostList(),
+      body: FixedBody(
+        child: PostList(),
+      ),
       backgroundColor: Colors.grey[100],
     );
   }
