@@ -16,9 +16,20 @@ class HomePage extends StatelessWidget {
         ),
         Container(
           child: Center(
-            child: Image.asset('assets/images/logo_white.png', width: 200),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                Image.asset('assets/images/logo_white.png', width: 200),
+                // Padding(padding: EdgeInsets.only(bottom: 4)),
+                Text('by Flutter',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w100,
+                    )),
+              ],
+            ),
           ),
-        )
+        ),
       ],
     ));
   }

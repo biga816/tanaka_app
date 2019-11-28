@@ -15,7 +15,8 @@ class PostList extends StatefulWidget {
   PostListState createState() => PostListState();
 }
 
-class PostListState extends State<PostList> {
+class PostListState extends State<PostList> with TickerProviderStateMixin {
+  AnimationController animationController;
   ScrollController controller;
   List<Function> disposers = [];
   bool isEnableLoading = true;
@@ -25,6 +26,8 @@ class PostListState extends State<PostList> {
   void initState() {
     super.initState();
     controller = new ScrollController();
+    animationController =
+        AnimationController(duration: Duration(milliseconds: 600), vsync: this);
 
     // fetch all posts
     if (post.page == 1) {
@@ -41,6 +44,7 @@ class PostListState extends State<PostList> {
   @override
   void dispose() {
     disposers.forEach((disposer) => disposer());
+    animationController.dispose();
     super.dispose();
   }
 
@@ -57,7 +61,17 @@ class PostListState extends State<PostList> {
                   // item
                   // if (i.isOdd) return Divider();
                   // final index = i ~/ 2;
-                  return _buildRow(post.posts[i]);
+                  animationController.forward();
+                  return _buildRow(
+                    post.posts[i],
+                    Tween(begin: 0.0, end: 1.0).animate(
+                      CurvedAnimation(
+                        parent: this.animationController,
+                        curve: Interval((1 - 1 / (i + 1)) * 1, 1.0,
+                            curve: Curves.fastOutSlowIn),
+                      ),
+                    ),
+                  );
                 } else {
                   // loading
                   return Observer(
@@ -72,23 +86,35 @@ class PostListState extends State<PostList> {
         }));
   }
 
-  Widget _buildRow(Post post) {
-    return Card(
-      elevation: 4,
-      margin: EdgeInsets.all(6),
-      shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(8))),
-      child: InkWell(
-          child: PostListItem(
-            thumbnail: Image(
-                image: NetworkImage(post.media.medium), fit: BoxFit.cover),
-            title: post.title,
-            subtitle: post.tags.map((tag) => tag.name).join(", "),
-            publishDate:
-                DateUtil.format(post.date, "yyyy/MM/dd(E) HH:mm", "ja_JP"),
-          ),
-          onTap: () => goToDetail(post)),
-    );
+  Widget _buildRow(Post post, Animation animation) {
+    return AnimatedBuilder(
+        animation: animationController,
+        builder: (BuildContext context, Widget child) {
+          return FadeTransition(
+            opacity: animation,
+            child: new Transform(
+              transform: new Matrix4.translationValues(
+                  0.0, 30 * (1.0 - animation.value), 0.0),
+              child: Card(
+                elevation: 4,
+                margin: EdgeInsets.all(6),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(8))),
+                child: InkWell(
+                    child: PostListItem(
+                      thumbnail: Image(
+                          image: NetworkImage(post.media.medium),
+                          fit: BoxFit.cover),
+                      title: post.title,
+                      subtitle: post.tags.map((tag) => tag.name).join(", "),
+                      publishDate: DateUtil.format(
+                          post.date, "yyyy/MM/dd(E) HH:mm", "ja_JP"),
+                    ),
+                    onTap: () => goToDetail(post)),
+              ),
+            ),
+          );
+        });
   }
 
   bool _handleScrollNotification(ScrollNotification notification) {
