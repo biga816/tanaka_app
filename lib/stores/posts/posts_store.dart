@@ -27,9 +27,6 @@ abstract class _PostsStore with Store {
   Future fetchPosts(int page) async {
     try {
       this.loading = true;
-      if (page == 1) {
-        this.posts.clear();
-      }
 
       String url = "http://blog.tanakas.org/wp-json/wp/v2/posts";
       Map<String, dynamic> params = {
@@ -41,6 +38,10 @@ abstract class _PostsStore with Store {
       Response response = await Dio().get(url, queryParameters: params);
       List<Post> _posts =
           response.data.map<Post>((data) => Post.fromMap(data)).toList();
+
+      if (page == 1) {
+        this.posts.clear();
+      }
 
       this.posts.addAll(_posts);
       this.page = page;

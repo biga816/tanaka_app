@@ -30,7 +30,7 @@ class PostListState extends State<PostList> with TickerProviderStateMixin {
         AnimationController(duration: Duration(milliseconds: 600), vsync: this);
 
     // fetch all posts
-    if (post.page == 1) {
+    if (post.page == 1 && post.posts.length == 0) {
       post.fetchPosts(post.page);
     }
 
@@ -51,7 +51,9 @@ class PostListState extends State<PostList> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return NotificationListener<ScrollNotification>(
-        onNotification: _handleScrollNotification,
+      onNotification: _handleScrollNotification,
+      child: new RefreshIndicator(
+        onRefresh: () => post.fetchPosts(1),
         child: Observer(builder: (_) {
           return ListView.builder(
               padding: const EdgeInsets.fromLTRB(8, 16, 8, 90),
@@ -83,7 +85,9 @@ class PostListState extends State<PostList> with TickerProviderStateMixin {
                 }
               },
               itemCount: post.posts.length + 1);
-        }));
+        }),
+      ),
+    );
   }
 
   Widget _buildRow(Post post, Animation animation) {
