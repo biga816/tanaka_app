@@ -167,7 +167,7 @@ class _BottomBarState extends State<BottomBar> with TickerProviderStateMixin {
                                     'https://twitter.com/biga816', '_blank');
                               },
                               child: Icon(
-                                Icons.mail_outline,
+                                Icons.chat_bubble_outline,
                                 color: Colors.white,
                                 size: 32,
                               ),

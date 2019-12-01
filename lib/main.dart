@@ -9,7 +9,7 @@ import './pages/work_page/work_page.dart';
 
 void main() {
   runApp(MaterialApp(
-    title: 'Navigation Basics',
+    title: 'tanaka no web',
     home: TabHome(),
     theme: new ThemeData(
       // brightness: Brightness.dark,
