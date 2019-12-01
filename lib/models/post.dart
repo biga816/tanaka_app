@@ -1,27 +1,4 @@
-class Media {
-  String mediaType;
-  String full;
-  String large;
-  String medium;
-  String thumbnail;
-
-  Media({this.mediaType, this.full, this.large, this.medium, this.thumbnail});
-
-  factory Media.fromMap(Map<String, dynamic> json) => Media(
-      mediaType: json["media_type"],
-      full: json["media_details"]["sizes"]["full"]["source_url"],
-      large: json["media_details"]["sizes"]["large"]["source_url"],
-      medium: json["media_details"]["sizes"]["medium"]["source_url"],
-      thumbnail: json["media_details"]["sizes"]["thumbnail"]["source_url"]);
-
-  Map<String, dynamic> toMap() => {
-        "mediaType": mediaType,
-        "full": full,
-        "large": large,
-        "medium": medium,
-        "thumbnail": thumbnail,
-      };
-}
+import './media.dart';
 
 class Tag {
   int id;

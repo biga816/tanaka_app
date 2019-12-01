@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import './widgets/work_list.dart';
+import 'package:tanaka_app/widgets/fixed_body/fixed_body.dart';
 
 class WorkPage extends StatelessWidget {
   @override
@@ -7,10 +9,8 @@ class WorkPage extends StatelessWidget {
       appBar: AppBar(
         title: Text('Work'),
       ),
-      body: Stack(
-        children: <Widget>[
-          Container(child: Center(child: Text('comming soon...')))
-        ],
+      body: FixedBody(
+        child: WorkList(),
       ),
       backgroundColor: Colors.grey[100],
     );
