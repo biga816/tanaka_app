@@ -15,50 +15,75 @@ class BlogDtailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("${post?.title}"),
-      ),
-      body: SingleChildScrollView(
-          child: Column(
+      body: Stack(
         children: <Widget>[
-          Container(
-            height: 240,
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: NetworkImage(post.media.large),
-                fit: BoxFit.cover,
-              ),
+          SingleChildScrollView(
+            child: Column(
+              children: <Widget>[
+                Container(
+                  height: 240,
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: NetworkImage(post.media.large),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
+                FixedBody(
+                  child: Column(children: <Widget>[
+                    BlogHeader(post),
+                    Padding(
+                        padding: EdgeInsets.fromLTRB(8, 8, 8, 64),
+                        child: Html(
+                          useRichText: false,
+                          data: '${post?.content}',
+                          linkStyle: const TextStyle(
+                            color: Colors.cyan,
+                          ),
+                          onLinkTap: (url) {
+                            html.window.open(url, '_blank');
+                          },
+                          customRender: (node, children) {
+                            if (node is dom.Element) {
+                              switch (node.localName) {
+                                case "pre":
+                                  return SorceCode(node.text);
+                                case "img":
+                                  return Center(
+                                      child: Html(data: node.outerHtml));
+                              }
+                            }
+                          },
+                        ))
+                  ]),
+                )
+              ],
             ),
           ),
-          FixedBody(
-            child: Column(children: <Widget>[
-              BlogHeader(post),
-              Padding(
-                  padding: EdgeInsets.fromLTRB(8, 8, 8, 64),
-                  child: Html(
-                    useRichText: false,
-                    data: '${post?.content}',
-                    linkStyle: const TextStyle(
-                      color: Colors.cyan,
+          Positioned(
+            // --> App Bar
+            child: Column(
+              children: [
+                AppBar(
+                  backgroundColor: Colors.transparent,
+                  elevation: 0.0,
+                  leading: Padding(
+                    // --> Custom Back Button
+                    padding: const EdgeInsets.all(4.0),
+                    child: FloatingActionButton(
+                      elevation: 2.0,
+                      backgroundColor: Colors.white,
+                      mini: true,
+                      onPressed: () => Navigator.of(context).pop(),
+                      child: Icon(Icons.arrow_back, color: Colors.black),
                     ),
-                    onLinkTap: (url) {
-                      html.window.open(url, '_blank');
-                    },
-                    customRender: (node, children) {
-                      if (node is dom.Element) {
-                        switch (node.localName) {
-                          case "pre":
-                            return SorceCode(node.text);
-                          case "img":
-                            return Center(child: Html(data: node.outerHtml));
-                        }
-                      }
-                    },
-                  ))
-            ]),
-          )
+                  ),
+                )
+              ],
+            ),
+          ),
         ],
-      )),
+      ),
       backgroundColor: Colors.grey[100],
     );
   }
